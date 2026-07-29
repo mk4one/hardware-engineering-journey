@@ -1,1 +1,1 @@
-# hardware-engineering-journey
+HDLBits와 Nand2tetris를 학습한 내용을 남김.
