@@ -1,0 +1,32 @@
+# Quartus
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+*.qws
+*.rpt
+*.summary
+*.smsg
+*.pin
+*.sof
+*.pof
+*.jdi
+*.done
+*_description.txt
+c5_pin_model_dump.txt
+
+# Questa / ModelSim (NativeLink-free workflow: work/scripts/sim.tcl)
+transcript
+vsim.wlf
+*.vstf
+*.mti
+sim_build/
+modelsim.ini
+
+# VS Code
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
