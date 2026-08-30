@@ -1,10 +1,10 @@
 @echo off
 rem Same as run_sim.bat but opens the Questa GUI with the waveform loaded
-rem and leaves it open: run_wave.bat <lab_name>
+rem and leaves it open: run_wave.bat <lab_name> [tb_name]
 setlocal
 
 if "%~1"=="" (
-    echo Usage: run_wave.bat ^<lab_name^>
+    echo Usage: run_wave.bat ^<lab_name^> [tb_name]
     exit /b 1
 )
 
@@ -16,4 +16,4 @@ if "%VSIM_EXE%"=="" (
     set "VSIM_EXE=vsim"
 )
 
-"%VSIM_EXE%" -do "source {%SIM_TCL%}; run_lab_gui {%~1}"
+"%VSIM_EXE%" -do "source {%SIM_TCL%}; run_lab_gui {%~1} {%~2}"

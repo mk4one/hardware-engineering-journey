@@ -43,18 +43,32 @@ proc compile_lab {lab_name} {
     vlog -work work +incdir+$lab_dir/rtl {*}$rtl_files
     vlog -work work +incdir+$lab_dir/tb  {*}$tb_files
 
-    return [file rootname [file tail [lindex $tb_files 0]]]
+    set tb_names {}
+    foreach f $tb_files {
+        lappend tb_names [file rootname [file tail $f]]
+    }
+    return $tb_names
 }
 
-proc run_lab {lab_name} {
-    set top_module [compile_lab $lab_name]
-    vsim -c -voptargs=+acc work.$top_module
+# tb_name is optional: leave it blank to run the first tb_*.v found (fine
+# while a lab has exactly one testbench). Once a lab has more than one
+# (e.g. tb_adder_1bit + tb_adder_4bit), pass the one you want by name:
+#   run_lab lab01 tb_adder_1bit
+proc run_lab {lab_name {tb_name ""}} {
+    set tb_names [compile_lab $lab_name]
+    if {$tb_name eq ""} {
+        set tb_name [lindex $tb_names 0]
+    }
+    vsim -c -voptargs=+acc work.$tb_name
     run -all
 }
 
-proc run_lab_gui {lab_name} {
-    set top_module [compile_lab $lab_name]
-    vsim -voptargs=+acc work.$top_module
+proc run_lab_gui {lab_name {tb_name ""}} {
+    set tb_names [compile_lab $lab_name]
+    if {$tb_name eq ""} {
+        set tb_name [lindex $tb_names 0]
+    }
+    vsim -voptargs=+acc work.$tb_name
     add wave -r /*
     run -all
     wave zoom full
