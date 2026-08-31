@@ -28,7 +28,7 @@ module tb_adder_4bit;
                     cin = k;
                     #10;
                     expected = a + b + cin;
-                    if (expected != {cout, sum}) begin
+                    if (expected !== {cout, sum}) begin
                         errors = errors + 1;
                         $display("FAIL: a=%0d b=%0d cin=%0d -> got cout=%b sum=%0d, expected cout=%b sum=%0d", a, b, cin, cout, sum, expected[4], expected[3:0]);
                     end
