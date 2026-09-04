@@ -4,7 +4,7 @@ module mux2 (
     input  sel,
     output y
 );
-    assign y = sel ? a : b;
+    assign y = sel ? b : a;
     // 채우기
 endmodule
 
@@ -43,7 +43,7 @@ module vec_practice (
     // 채우기
     assign upper_nibble = a[7:4];
     assign lower_nibble = a[3:0];
-    assign sign_extended = {8{a[7]},a};
+    assign sign_extended = {{8{a[7]}}, a};
     assign swapped = {lower_nibble, upper_nibble};
 
 endmodule
